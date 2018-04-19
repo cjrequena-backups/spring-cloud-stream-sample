@@ -78,6 +78,16 @@ spring.cloud.stream.kafka.bindings:
         max:
           request:
             size: 999999999
+  # The following properties are available for Kafka consumers only and must be prefixed with spring.cloud.stream.kafka.bindings.<channelName>.consumer.
+  channel-name: # The channel
+    autoRebalanceEnabled: # When true, topic partitions will be automatically rebalanced between the members of a consumer group. When false, each consumer will be assigned a fixed set of partitions based on spring.cloud.stream.instanceCount and spring.cloud.stream.instanceIndex. This requires both spring.cloud.stream.instanceCount and spring.cloud.stream.instanceIndex properties to be set appropriately on each launched instance. The property spring.cloud.stream.instanceCount must typically be greater than 1 in this case. Default: true
+    autoCommitOffset: # Whether to autocommit offsets when a message has been processed. If set to false, a header with the key kafka_acknowledgment of the type org.springframework.kafka.support.Acknowledgment header will be present in the inbound message. Applications may use this header for acknowledging messages. See the examples section for details. When this property is set to false, Kafka binder will set the ack mode to org.springframework.kafka.listener.AbstractMessageListenerContainer.AckMode.MANUAL. Default: true
+    autoCommitOnError: # Effective only if autoCommitOffset is set to true. If set to false it suppresses auto-commits for messages that result in errors, and will commit only for successful messages, allows a stream to automatically replay from the last successfully processed message, in case of persistent failures. If set to true, it will always auto-commit (if auto-commit is enabled). If not set (default), it effectively has the same value as enableDlq, auto-committing erroneous messages if they are sent to a DLQ, and not committing them otherwise. Default: not set.
+    recoveryInterval: # The interval between connection recovery attempts, in milliseconds. Default: 5000.
+    startOffset: # The starting offset for new groups. Allowed values: earliest, latest. If the consumer group is set explicitly for the consumer 'binding' (via spring.cloud.stream.bindings.<channelName>.group), then 'startOffset' is set to earliest; otherwise it is set to latest for the anonymous consumer group. Default: null (equivalent to earliest).
+    enableDlq: # When set to true, it will send enable DLQ behavior for the consumer. By default, messages that result in errors will be forwarded to a topic named error.<destination>.<group>. The DLQ topic name can be configurable via the property dlqName. This provides an alternative option to the more common Kafka replay scenario for the case when the number of errors is relatively small and replaying the entire original topic may be too cumbersome. Default: false. <destination>.<group>).
+    configuration: # Map with a key/value pair containing generic Kafka consumer properties. Default: Empty map.
+    dlqName: # The name of the DLQ topic to receive the error messages. Default: null (If not specified, messages that result in errors will be forwarded to a topic named error.
 # By default, binders share the application’s Spring Boot auto-configuration, so that one instance of each binder found on the classpath will be created. If your application should connect to more than one broker of the same type, you can specify multiple binder configurations, each with different environment settings.
 spring.cloud.stream.binders:
   kafka-1:
@@ -102,7 +112,7 @@ spring.cloud.stream.binders:
                 replicationFactor: 1 # The replication factor of auto-created topics if autoCreateTopics is active.
                 autoCreateTopics: false # If set to true, the binder will create new topics automatically.
                 autoAddPartitions: true # If set to true, the binder will create add new partitions if required
-                socketBufferSize: 1000000000 # Size (in bytes) of the socket buffer to be used by the Kafka consumers
+                socketBufferSize: 1000000000 # Size (in bytes) of the socket buffer to be used by the Kafka consumers.
 spring.cloud.stream.kafka.binder:
   brokers:  # A list of brokers to which the Kafka binder will connect. Default: localhost.
   defaultBrokerPort: 9092 # brokers allows hosts specified with or without port information (e.g., host1,host2:port2). This sets the default port when no port is configured in the broker list. Default: 9092.
