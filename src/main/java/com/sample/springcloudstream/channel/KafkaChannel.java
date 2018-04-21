@@ -6,13 +6,13 @@ import org.springframework.messaging.MessageChannel;
 
 public interface KafkaChannel {
 
-  String FOO_CHANNEL_INPUT = "foo_channel_input";
-  String FOO_CHANNEL_OUTPUT = "foo_channel_output";
+  String FOO_INPUT_CHANNEL = "foo_input_channel";
+  String FOO_OUTPUT_CHANNEL = "foo_output_channel";
 
-  @Output(FOO_CHANNEL_OUTPUT)
-  MessageChannel fooChannelOutput();
+  @Output(FOO_OUTPUT_CHANNEL)
+  MessageChannel fooOutputChannel();
 
-  @Input(FOO_CHANNEL_INPUT)
-  MessageChannel fooChannelInput();
+  @Input(FOO_INPUT_CHANNEL)
+  MessageChannel fooInputChannel();
 
 }

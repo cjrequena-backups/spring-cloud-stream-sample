@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class FooSinkService implements IFooSinkService{
 
-  @StreamListener(KafkaChannel.FOO_CHANNEL_INPUT)
+  @StreamListener(KafkaChannel.FOO_INPUT_CHANNEL)
   public synchronized void listener(Message<?> message) {
     FooDTO dto = (FooDTO) message.getPayload();
     log.debug("GET MESSAGE {}", message);

@@ -27,7 +27,7 @@ spring.cloud.stream:
 #spring.cloud.stream.default:
 #  content-type: application/json # The content type of the channel.
 spring.cloud.stream.bindings:
-  foo_channel_output: # The channel
+  foo_output_channel: # The channel
     destination: messagetype.datasetname.dataname # The target destination of a channel on the bound middleware (e.g., the RabbitMQ exchange or Kafka topic).
     content-type: application/json # The content type of the channel.
     binder: kafka # The binder used by this binding. See Multiple Binders on the Classpath for details.
@@ -41,7 +41,7 @@ spring.cloud.stream.bindings:
       headerMode: embeddedHeaders # When set to raw, disables header embedding on output. Effective only for messaging middleware that does not support message headers natively and requires header embedding. Useful when producing data for non-Spring Cloud Stream applications.
       useNativeEncoding: false # When set to true, the outbound message is serialized directly by client library, which must be configured correspondingly (e.g. setting an appropriate Kafka producer value serializer).
       #errorChannelEnabled: # When set to true, if the binder supports async send results; send failures will be sent to an error channel for the destination. See Message Channel Binders and Error Channels for more information.
-  foo_channel_input:
+  foo_input_channel:
     destination: messagetype.datasetname.dataname # The target destination of a channel on the bound middleware (e.g., the RabbitMQ exchange or Kafka topic).
     group: group-1 # The consumer group of the channel. Applies only to inbound bindings. See Consumer Groups.
     content-type: application/x-java-object;type=com.sample.springcloudstream.dto.FooDTO
@@ -57,7 +57,7 @@ spring.cloud.stream.bindings:
       instanceIndex: -1 # When set to a value greater than equal to zero, allows customizing the instance index of this consumer (if different from spring.cloud.stream.instanceIndex). When set to a negative value, it will default to spring.cloud.stream.instanceIndex. Default: -1.
       instanceCount: -1 # When set to a value greater than equal to zero, allows customizing the instance count of this consumer (if different from spring.cloud.stream.instanceCount). When set to a negative value, it will default to spring.cloud.stream.instanceCount. Default: -1.
 spring.cloud.stream.kafka.bindings:
-  foo_channel_output: # The channel
+  foo_output_channel: # The channel
     producer:
       bufferSize: 33554432 # Upper limit, in bytes, of how much data the Kafka producer will attempt to batch before sending
       sync: false # Whether the producer is synchronous.
