@@ -20,7 +20,7 @@ public class FooSourceService implements IFooSourceService {
   MessageChannel fooChannelOutput;
 
   @Autowired
-  public FooSourceService(@Qualifier(KafkaChannel.FOO_OUTPUT_CHANNEL) MessageChannel fooChannelOutput) {
+  public FooSourceService(@Qualifier(KafkaChannel.FOO_OUTPUT_CHANNEL1) MessageChannel fooChannelOutput) {
     this.fooChannelOutput = fooChannelOutput;
   }
 
