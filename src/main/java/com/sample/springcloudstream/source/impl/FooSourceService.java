@@ -26,6 +26,7 @@ public class FooSourceService implements IFooSourceService {
 
   @Override
   public void send(FooDTO dto) {
+    log.debug("Output channel 1 message {}", dto);
     Map<String, String> headers = new HashMap<>();
     fooChannelOutput.send(MessageBuilder.withPayload(dto).copyHeaders(headers).build());
   }

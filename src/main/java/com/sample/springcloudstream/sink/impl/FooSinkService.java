@@ -18,18 +18,18 @@ public class FooSinkService implements IFooSinkService {
   @StreamListener(KafkaChannel.FOO_INPUT_CHANNEL1)
   @SendTo(KafkaChannel.FOO_OUTPUT_CHANNEL2)
   public synchronized FooDTO processMessage(Message<?> message) throws InterruptedException {
-    log.debug("Input message -> {}", message);
+    log.debug("Channel 1 Input message -> {}", message);
     FooDTO dto = (FooDTO) message.getPayload();
     dto.setName(dto.getName() + "-" + LocalDate.now());
-    Thread.sleep(1000);
+    wait(1000);
     return dto;
   }
 
   @StreamListener(KafkaChannel.FOO_INPUT_CHANNEL2)
   public synchronized void listener(Message<?> message) throws InterruptedException {
-    log.debug("Input message -> {}", message);
+    log.debug("Channel 2 Input message -> {}", message);
     FooDTO dto = (FooDTO) message.getPayload();
-    Thread.sleep(1000);
+    wait(1000);
   }
 
 }
