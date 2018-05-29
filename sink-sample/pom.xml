@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <packaging>jar</packaging>
+    <artifactId>sink-sample</artifactId>
+    <!-- -->
+    <parent>
+        <artifactId>spring-cloud-stream-sample</artifactId>
+        <groupId>com.sample.springcloudstream</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <properties>
+        <start-class>com.sample.springcloudstream.sink.MainApplication</start-class>
+    </properties>
+    <dependencies>
+    </dependencies>
+    <build>
+        <finalName>sink-sample</finalName>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>**/*.properties</include>
+                    <include>**/*.yml</include>
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>
+        </resources>
+        <plugins>
+            <!-- -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring-boot.version}</version>
+                <configuration>
+                    <mainClass>${start-class}</mainClass>
+                    <classifier>exec</classifier>
+                    <excludeDevtools>true</excludeDevtools>
+                </configuration>
+                <executions>
+                    <execution>
+                        <!-- Create a spring-boot-ready jar with all dependencies included -->
+                        <phase>package</phase>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

@@ -5,7 +5,12 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.sample.springcloudstream</groupId>
     <artifactId>spring-cloud-stream-sample</artifactId>
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>source-sample</module>
+        <module>sink-sample</module>
+    </modules>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
@@ -25,10 +30,14 @@
         <spring-boot.version>1.5.11.RELEASE</spring-boot.version>
         <spring-cloud-dependencies.version>Edgware.SR3</spring-cloud-dependencies.version>
 
+        <!-- Jackson-->
+        <jackson-dataformat-msgpack.version>0.8.15</jackson-dataformat-msgpack.version>
+        <feign-jackson.version>8.18.0</feign-jackson.version>
+        <jackson-datatype-money.version>1.0.2</jackson-datatype-money.version>
+
         <!-- Boilerplate -->
         <lombok.version>1.16.12</lombok.version>
 
-        <start-class>com.sample.springcloudstream.MainApplication</start-class>
     </properties>
     <!-- -->
     <dependencyManagement>
@@ -100,13 +109,40 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <!--  Jackson -->
+        <dependency>
+            <groupId>org.msgpack</groupId>
+            <artifactId>jackson-dataformat-msgpack</artifactId>
+            <version>${jackson-dataformat-msgpack.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.netflix.feign</groupId>
+            <artifactId>feign-jackson</artifactId>
+            <version>${feign-jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.zalando</groupId>
+            <artifactId>jackson-datatype-money</artifactId>
+            <version>${jackson-datatype-money.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jdk8</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-jsr310</artifactId>
+        </dependency>
         <!-- Due a dependency with kafka, is needed to add log4j, next spring cloud version may no need it -->
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
             <version>1.2.17</version>
         </dependency>
-
         <!--Boilerplate-->
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -116,18 +152,6 @@
         </dependency>
     </dependencies>
     <build>
-        <finalName>spring-boot-redis-sample</finalName>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <filtering>true</filtering>
-                <includes>
-                    <include>**/*.properties</include>
-                    <include>**/*.yml</include>
-                    <include>**/*.xml</include>
-                </includes>
-            </resource>
-        </resources>
         <plugins>
             <!-- -->
             <plugin>
@@ -191,26 +215,6 @@
                 <groupId>io.swagger</groupId>
                 <artifactId>swagger-codegen-maven-plugin</artifactId>
                 <version>${swagger-codegen-maven-plugin.version}</version>
-            </plugin>
-            <!-- -->
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>${spring-boot.version}</version>
-                <configuration>
-                    <mainClass>${start-class}</mainClass>
-                    <classifier>exec</classifier>
-                    <excludeDevtools>true</excludeDevtools>
-                </configuration>
-                <executions>
-                    <execution>
-                        <!-- Create a spring-boot-ready jar with all dependencies included -->
-                        <phase>package</phase>
-                        <goals>
-                            <goal>repackage</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>
