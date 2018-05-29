@@ -1,13 +1,14 @@
 #-----------------------------------------------------------------------------------------------
 # KAFKA
 #-----------------------------------------------------------------------------------------------
-# see https://docs.spring.io/autorepo/docs/spring-cloud-stream-binder-kafka-docs/1.1.0.M1/reference/htmlsingle/
+# - https://docs.spring.io/spring-cloud-stream/docs/current/reference/htmlsingle/
+# - https://docs.spring.io/autorepo/docs/spring-cloud-stream-binder-kafka-docs/1.1.0.RELEASE/reference/htmlsingle/
 spring.cloud.stream:
-  instanceCount: 1 # The number of deployed instances of an application. Must be set for partitioning and if using Kafka.
-  instanceIndex: # The instance index of the application: a number from 0 to instanceCount-1. Used for partitioning and with Kafka.
+  instanceCount: # The number of deployed instances of an application. Must be set for partitioning and if using Kafka. Default: 1
+  instanceIndex: # The instance index of the application: a number from 0 to instanceCount -1. Used for partitioning and with Kafka. Automatically set in Cloud Foundry to match the application’s instance index
   dynamicDestinations: # A list of destinations that can be bound dynamically (for example, in a dynamic routing scenario). If set, only listed destinations can be bound. Default: empty (allowing any destination to be bound).
   defaultBinder: kafka # The default binder to use, if multiple binders are configured. See Multiple Binders on the Classpath.
-  overrideCloudConnectors: false # This property is only applicable when the cloud profile is active and Spring Cloud Connectors are provided with the application. If the property is false (the default), the binder will detect a suitable bound service
+  overrideCloudConnectors: # This property is only applicable when the cloud profile is active and Spring Cloud Connectors are provided with the application. If the property is false (the default), the binder will detect a suitable bound service
   schema.server: # boolean setting enables the deletion of schema. By default this is disabled.
     path: # The spring.cloud.stream.schema.server.path setting can be used to control the root path of the schema server (especially when it is embedded in other applications).
     allowSchemaDeletion: #
