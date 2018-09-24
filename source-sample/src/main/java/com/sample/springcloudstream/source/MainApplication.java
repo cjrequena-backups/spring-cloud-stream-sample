@@ -48,12 +48,15 @@ public class MainApplication implements CommandLineRunner {
   }
 
   @Override
-  public void run(String... strings) {
-    FooDTO dto = new FooDTO();
-    String uuid = UUID.randomUUID().toString();
-    dto.setId(uuid);
-    dto.setName("Foo-" + uuid);
-    fooService.send(dto);
+  public void run(String... strings) throws InterruptedException {
+    for (int i = 0; i < 100; i++) {
+      FooDTO dto = new FooDTO();
+      String uuid = UUID.randomUUID().toString();
+      dto.setId(uuid);
+      dto.setName("Foo-" + i);
+      fooService.send(dto);
+      Thread.sleep(1000);
+    }
   }
 }
 
