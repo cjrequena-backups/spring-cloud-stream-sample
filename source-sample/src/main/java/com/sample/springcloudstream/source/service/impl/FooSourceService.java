@@ -39,6 +39,7 @@ public class FooSourceService implements IFooSourceService {
   public void send(FooDTO dto) {
     log.debug("Output channel 1 message {}", dto);
     Map<String, String> headers = new HashMap<>();
+    headers.put("x-test-header","KO");
     fooChannelOutput.send(MessageBuilder.withPayload(dto).copyHeaders(headers).build());
   }
 

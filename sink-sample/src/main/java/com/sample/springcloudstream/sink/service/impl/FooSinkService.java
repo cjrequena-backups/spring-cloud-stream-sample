@@ -31,7 +31,7 @@ public class FooSinkService implements IFooSinkService {
     return new FooMessageConverter();
   }
 
-  @StreamListener(KafkaChannel.FOO_INPUT_CHANNEL1)
+  @StreamListener(value = KafkaChannel.FOO_INPUT_CHANNEL1, condition = "headers['x-test-header']=='OK'")
   public synchronized void listener(Message<FooDTO> message, FooDTO fooDTO) throws InterruptedException {
     log.debug("Channel 1 Input message -> {}", message);
     FooDTO dto = message.getPayload();

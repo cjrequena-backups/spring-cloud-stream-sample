@@ -1,7 +1,5 @@
 package com.sample.springcloudstream.source;
 
-
-import com.sample.springcloudstream.source.dto.FooDTO;
 import com.sample.springcloudstream.source.service.IFooSourceService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +7,6 @@ import org.springframework.boot.Banner;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-import java.util.UUID;
 
 /**
  * <p>
@@ -49,14 +45,14 @@ public class MainApplication implements CommandLineRunner {
 
   @Override
   public void run(String... strings) throws InterruptedException {
-    for (int i = 0; i < 100; i++) {
-      FooDTO dto = new FooDTO();
-      String uuid = UUID.randomUUID().toString();
-      dto.setId(uuid);
-      dto.setName("Foo-" + i);
-      fooService.send(dto);
-      Thread.sleep(1000);
-    }
+//    for (int i = 0; i < 100; i++) {
+//      FooDTO dto = new FooDTO();
+//      String uuid = UUID.randomUUID().toString();
+//      dto.setId(uuid);
+//      dto.setName("FOO_TEST_" + i);
+//      fooService.send(dto);
+//      Thread.sleep(1000);
+//    }
   }
 }
 

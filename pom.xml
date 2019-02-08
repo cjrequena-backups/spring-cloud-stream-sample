@@ -27,8 +27,8 @@
         <swagger-codegen-maven-plugin.version>2.3.1</swagger-codegen-maven-plugin.version>
 
         <!-- Spring -->
-        <spring-boot.version>1.5.11.RELEASE</spring-boot.version>
-        <spring-cloud-dependencies.version>Edgware.SR3</spring-cloud-dependencies.version>
+        <spring-boot.version>1.5.19.RELEASE</spring-boot.version>
+        <spring-cloud-dependencies.version>Edgware.SR5</spring-cloud-dependencies.version>
 
         <!-- Jackson-->
         <jackson-dataformat-msgpack.version>0.8.15</jackson-dataformat-msgpack.version>

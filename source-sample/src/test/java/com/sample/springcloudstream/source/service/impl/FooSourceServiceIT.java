@@ -49,7 +49,7 @@ public class FooSourceServiceIT {
     for (int i = 0; i < 10; i++) {
       FooDTO dto = new FooDTO();
       dto.setId(UUID.randomUUID().toString());
-      dto.setName("TEST_" + i + "_" + UUID.randomUUID().toString());
+      dto.setName("FOO_TEST_" + i);
       fooService.send(dto);
     }
   }
