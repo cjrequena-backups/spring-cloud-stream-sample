@@ -1,8 +1,7 @@
-package com.sample.springcloudstream.source.service.impl;
+package com.sample.springcloudstream.source.service;
 
 import com.sample.springcloudstream.source.channel.KafkaChannel;
 import com.sample.springcloudstream.source.dto.FooDTO;
-import com.sample.springcloudstream.source.service.IFooSourceService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -26,7 +25,7 @@ import java.util.Map;
  */
 @Log4j2
 @Service
-public class FooSourceService implements IFooSourceService {
+public class FooSourceService {
 
   MessageChannel fooChannelOutput;
 
@@ -35,13 +34,11 @@ public class FooSourceService implements IFooSourceService {
     this.fooChannelOutput = fooChannelOutput;
   }
 
-  @Override
   public void send(FooDTO dto) {
     log.debug("Output channel 1 message {}", dto);
     Map<String, String> headers = new HashMap<>();
-    headers.put("x-test-header","KO");
+    headers.put("x-test-header", "OK");
     fooChannelOutput.send(MessageBuilder.withPayload(dto).copyHeaders(headers).build());
   }
-
 
 }

@@ -2,7 +2,7 @@ package com.sample.springcloudstream.source.service.impl;
 
 import com.sample.springcloudstream.source.dto.FooDTO;
 import com.sample.springcloudstream.source.MainApplication;
-import com.sample.springcloudstream.source.service.IFooSourceService;
+import com.sample.springcloudstream.source.service.FooSourceService;
 import lombok.extern.log4j.Log4j2;
 import org.junit.After;
 import org.junit.Before;
@@ -34,7 +34,7 @@ import java.util.UUID;
 public class FooSourceServiceIT {
 
   @Autowired
-  IFooSourceService fooService;
+  FooSourceService fooSourceService;
 
   @Before
   public void setUp() throws Exception {
@@ -50,7 +50,7 @@ public class FooSourceServiceIT {
       FooDTO dto = new FooDTO();
       dto.setId(UUID.randomUUID().toString());
       dto.setName("FOO_TEST_" + i);
-      fooService.send(dto);
+      fooSourceService.send(dto);
     }
   }
 

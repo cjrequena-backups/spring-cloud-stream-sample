@@ -1,9 +1,7 @@
-server:
-  port: ${SERVER_PORT:8080}
-  contextPath: /
-management:
-  context-path: /admin # Management endpoint context-path. For instance `/actuator`
-  security.enabled: false
+
+server.servlet.context-path: / # Context path of the application.
+server.port: ${SERVER_PORT:8080} # Server HTTP port.
+
 ---
 spring:
   application:
@@ -27,7 +25,7 @@ spring:
         # Register health check in consul. Useful during development of a service.
         registerHealthCheck: ${SPRING_CLOUD_CONSUL_DISCOVERY_REGISTERHEALTHCHECK:false}
         # Alternate server path to invoke for health checking
-        healthCheckPath: ${management.context-path}/health
+        healthCheckPath: /management/healthcheck
         # Custom health check url to override default
         #healthCheckUrl: ${SPRING_CLOUD_CONSUL_DISCOVERY_HEALTHCHECKURL}
         # How often to perform the health check (e.g. 10s), defaults to 10s.

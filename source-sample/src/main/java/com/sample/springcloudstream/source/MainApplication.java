@@ -1,6 +1,6 @@
 package com.sample.springcloudstream.source;
 
-import com.sample.springcloudstream.source.service.IFooSourceService;
+import com.sample.springcloudstream.source.service.FooSourceService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.Banner;
@@ -24,7 +24,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class MainApplication implements CommandLineRunner {
 
   @Autowired
-  IFooSourceService fooService;
+  FooSourceService fooSourceService;
 
   private static Class<MainApplication> mainApplicationClass = MainApplication.class;
 
@@ -50,7 +50,7 @@ public class MainApplication implements CommandLineRunner {
 //      String uuid = UUID.randomUUID().toString();
 //      dto.setId(uuid);
 //      dto.setName("FOO_TEST_" + i);
-//      fooService.send(dto);
+//      fooSourceService.send(dto);
 //      Thread.sleep(1000);
 //    }
   }

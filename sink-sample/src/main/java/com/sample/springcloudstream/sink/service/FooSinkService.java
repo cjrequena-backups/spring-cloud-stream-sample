@@ -1,9 +1,8 @@
-package com.sample.springcloudstream.sink.service.impl;
+package com.sample.springcloudstream.sink.service;
 
 import com.sample.springcloudstream.sink.dto.FooDTO;
 import com.sample.springcloudstream.sink.channel.KafkaChannel;
 import com.sample.springcloudstream.sink.messageconverter.FooMessageConverter;
-import com.sample.springcloudstream.sink.service.IFooSinkService;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.context.annotation.Bean;
@@ -24,7 +23,7 @@ import org.springframework.stereotype.Service;
  */
 @Log4j2
 @Service
-public class FooSinkService implements IFooSinkService {
+public class FooSinkService {
 
   @Bean
   public MessageConverter customMessageConverter() {
@@ -37,7 +36,5 @@ public class FooSinkService implements IFooSinkService {
     FooDTO dto = message.getPayload();
     wait(1000);
   }
-
-
 
 }
