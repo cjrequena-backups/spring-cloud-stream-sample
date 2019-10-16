@@ -1,7 +1,7 @@
 package com.sample.springcloudstream.source.service.impl;
 
+import com.sample.springcloudstream.source.SourceMainApplication;
 import com.sample.springcloudstream.source.dto.FooDTO;
-import com.sample.springcloudstream.source.MainApplication;
 import com.sample.springcloudstream.source.service.FooSourceService;
 import lombok.extern.log4j.Log4j2;
 import org.junit.After;
@@ -29,7 +29,7 @@ import java.util.UUID;
  */
 @Log4j2
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = MainApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(classes = SourceMainApplication.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class FooSourceServiceIT {
 

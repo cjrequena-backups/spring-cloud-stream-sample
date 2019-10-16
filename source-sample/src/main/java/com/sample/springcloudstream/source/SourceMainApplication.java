@@ -23,12 +23,12 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @Log4j2
 @SpringBootApplication
 @EnableAutoConfiguration
-public class MainApplication implements CommandLineRunner {
+public class SourceMainApplication implements CommandLineRunner {
 
   @Autowired
   FooSourceService fooSourceService;
 
-  private static Class<MainApplication> mainApplicationClass = MainApplication.class;
+  private static Class<SourceMainApplication> mainApplicationClass = SourceMainApplication.class;
 
   /**
    * @param args
@@ -47,14 +47,14 @@ public class MainApplication implements CommandLineRunner {
 
   @Override
   public void run(String... strings) throws InterruptedException {
-//    for (int i = 0; i < 100; i++) {
-//      FooDTO dto = new FooDTO();
-//      String uuid = UUID.randomUUID().toString();
-//      dto.setId(uuid);
-//      dto.setName("FOO_TEST_" + i);
-//      fooSourceService.send(dto);
-//      Thread.sleep(1000);
-//    }
+    //    for (int i = 0; i < 100; i++) {
+    //      FooDTO dto = new FooDTO();
+    //      String uuid = UUID.randomUUID().toString();
+    //      dto.setId(uuid);
+    //      dto.setName("FOO_TEST_" + i);
+    //      fooSourceService.send(dto);
+    //      Thread.sleep(1000);
+    //    }
   }
 }
 

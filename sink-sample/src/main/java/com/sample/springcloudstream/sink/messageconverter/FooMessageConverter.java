@@ -38,7 +38,8 @@ public class FooMessageConverter extends AbstractMessageConverter {
   @Override
   protected Object convertFromInternal(Message<?> message, Class<?> targetClass, Object conversionHint) {
     try {
-      return objectMapper.readValue(message.getPayload().toString(), new TypeReference<FooDTO>() {});
+      return objectMapper.readValue(message.getPayload().toString(), new TypeReference<FooDTO>() {
+      });
     } catch (IOException e) {
       return null;
     }

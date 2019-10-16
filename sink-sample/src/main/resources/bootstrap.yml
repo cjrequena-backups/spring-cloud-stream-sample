@@ -1,4 +1,3 @@
-
 server.servlet.context-path: / # Context path of the application.
 server.port: ${SERVER_PORT:9090} # Server HTTP port.
 

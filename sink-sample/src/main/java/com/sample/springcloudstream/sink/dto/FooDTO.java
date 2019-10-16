@@ -16,7 +16,7 @@ import java.io.Serializable;
  *
  */
 @Data
-public class FooDTO implements Serializable{
+public class FooDTO implements Serializable {
   private String id;
   private String name;
 

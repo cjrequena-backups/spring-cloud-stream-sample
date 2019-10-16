@@ -5,7 +5,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-
 /**
  * <p>
  * <p>
@@ -20,17 +19,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @Log4j2
 @SpringBootApplication
 @EnableAutoConfiguration
-public class MainApplication {
+public class SinkMainApplication {
 
-
-
-  private static Class<MainApplication> mainApplicationClass = MainApplication.class;
+  private static Class<SinkMainApplication> mainApplicationClass = SinkMainApplication.class;
 
   /**
    * @param args
    * @throws Exception
    */
-  public static void main(String[] args)  {
+  public static void main(String[] args) {
     try {
       SpringApplication springApplication = new SpringApplication(mainApplicationClass);
       springApplication.run(args);

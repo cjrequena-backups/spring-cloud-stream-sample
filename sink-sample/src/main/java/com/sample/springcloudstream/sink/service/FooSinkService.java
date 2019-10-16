@@ -1,9 +1,12 @@
 package com.sample.springcloudstream.sink.service;
 
-import com.sample.springcloudstream.sink.dto.FooDTO;
+import brave.Tracer;
+import brave.Tracing;
 import com.sample.springcloudstream.sink.channel.KafkaChannel;
+import com.sample.springcloudstream.sink.dto.FooDTO;
 import com.sample.springcloudstream.sink.messageconverter.FooMessageConverter;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.context.annotation.Bean;
 import org.springframework.messaging.Message;
@@ -25,6 +28,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class FooSinkService {
 
+  @Autowired
+  private Tracing tracing;
+  @Autowired
+  private Tracer tracer;
+
   @Bean
   public MessageConverter customMessageConverter() {
     return new FooMessageConverter();
@@ -33,6 +41,10 @@ public class FooSinkService {
   @StreamListener(value = KafkaChannel.FOO_INPUT_CHANNEL1, condition = "headers['x-test-header']=='OK'")
   public synchronized void listener(Message<FooDTO> message, FooDTO fooDTO) throws InterruptedException {
     log.debug("Channel 1 Input message -> {}", message);
+    String traceID = tracer.currentSpan().context().traceIdString();
+    String spanID = tracer.currentSpan().context().spanIdString();
+    log.debug("traceID: {}, spainID: {} ", traceID, spanID);
+
     FooDTO dto = message.getPayload();
     wait(1000);
   }
