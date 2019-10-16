@@ -70,7 +70,7 @@ spring.cloud.stream.kafka.binder:
   zkNodes: localhost # A list of ZooKeeper nodes to which the Kafka binder can connect.
   defaultZkPort: 2181 # This sets the default port when no port is configured in the node list
   #configuration: # Key/Value map of client properties (both producers and consumer) passed to all clients created by the binder. Due to the fact that these properties will be used by both producers and consumers, usage should be restricted to common properties, especially security settings. Default: Empty map.
-  headers: x-retries #  The list of custom headers that will be transported by the binder. Default: empty.
+  headers: # The list of custom headers that will be transported by the binder. Default: empty.
   healthTimeout: 60 # The time to wait to get partition information in seconds; default 60. Health will report as down if this timer expires.
   offsetUpdateTimeWindow: 10000 # The frequency, in milliseconds, with which offsets are saved. Ignored if 0.
   offsetUpdateCount: 0 # The frequency, in number of updates, which which consumed offsets are persisted. Ignored if 0. Mutually exclusive with offsetUpdateTimeWindow
