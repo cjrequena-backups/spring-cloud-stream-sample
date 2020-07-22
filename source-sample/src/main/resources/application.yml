@@ -93,3 +93,19 @@ logging.level: # Log levels severity mapping. For instance, `logging.level.org.s
   org.springframework: INFO
   io.swagger.models.*: ERROR
   com.sample.*: DEBUG
+
+#SPRINGDOC
+springdoc:
+  api-docs:
+    groups:
+        enabled: true
+  swagger-ui:
+    path: /swagger-ui.html
+    display-request-duration: true
+    groups-order: DESC
+  version: '@project.version@'
+  show-actuator: true
+  group-configs:
+    - group: v1
+      paths-to-match: /foo-service/**
+      packages-to-scan: com.cjrequena.sample.sourcesample.ws.controller
