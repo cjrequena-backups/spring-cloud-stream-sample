@@ -51,7 +51,7 @@ spring.cloud.stream.bindings:
   foo_input_channel_1:
     destination: messagetype.datasetname.dataname # The target destination of a channel on the bound middleware (e.g., the RabbitMQ exchange or Kafka topic).
     group: group-1 # The consumer group of the channel. Applies only to inbound bindings. See Consumer Groups.
-    #content-type: application/x-java-object;type=com.sample.springcloudstream.sink.dto.FooDTO
+    #content-type: application/x-java-object;type=FooDTO
     content-type: application/json
     binder: kafka # The binder used by this binding. See Multiple Binders on the Classpath for details.
     consumer:
