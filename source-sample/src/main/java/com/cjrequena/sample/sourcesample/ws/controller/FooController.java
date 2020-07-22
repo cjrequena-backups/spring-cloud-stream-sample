@@ -4,11 +4,13 @@ import brave.Tracer;
 import brave.Tracing;
 import com.cjrequena.sample.sourcesample.dto.FooDTO;
 import com.cjrequena.sample.sourcesample.service.FooSourceService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -25,6 +27,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+
 /**
  * <p>
  * <p>
@@ -39,10 +43,6 @@ import javax.validation.Valid;
 @Log4j2
 @RestController
 @RequestMapping(value = "/foo-service")
-@Api(
-  value = "Foo Entity",
-  tags = {"Foo Entity"}
-)
 public class FooController {
 
   @Autowired
@@ -52,35 +52,34 @@ public class FooController {
   @Autowired
   private FooSourceService fooSourceService;
 
-  /**
-   * Create a new foo.
-   *
-   * @param dto {@link FooDTO}
-   * @param bindingResult {@link BindingResult}
-   * @return ResponseEntity {@link ResponseEntity}
-   */
-  @ApiOperation(
-    tags = "Foo Entity",
-    value = "Send foo to kafka",
-    notes = "Send foo to kafka"
+  public static final String VND_FOO_SERVICE_V1 = "vnd.foo-service.v1";
+
+
+  @Operation(
+    summary = "Create a new foo.",
+    description = "Create a new foo.",
+    parameters = {@Parameter(name= "accept-version", required = true, in = ParameterIn.HEADER,schema=@Schema(name = "accept-version", type = "string",implementation = String.class, allowableValues = {VND_FOO_SERVICE_V1}))},
+    requestBody =  @io.swagger.v3.oas.annotations.parameters.RequestBody(required = true, content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE, schema = @Schema(implementation = FooDTO.class)))
   )
   @ApiResponses(
     value = {
-      @ApiResponse(code = 200, message = "OK - The request was successful"),
-      @ApiResponse(code = 400, message = "Bad Request - The data given in the POST failed validation. Inspect the response body for details."),
-      @ApiResponse(code = 500, message = "Internal Server Error - We couldn't create the resource. Please try again."),
-      @ApiResponse(code = 503, message = "Service Unavailable - We are temporarily unable. Please wait for a bit and try again. ")
+      @ApiResponse(responseCode = "200", description = "OK - The request was successful"),
+      @ApiResponse(responseCode = "201", description = "Created - The request was successful, we created a new resource and the response body contains the representation."),
+      @ApiResponse(responseCode = "204", description = "No Content - The request was successful, we created a new resource and the response body does not contains the representation."),
+      @ApiResponse(responseCode = "400", description = "Bad Request - The data given in the POST failed validation. Inspect the response body for details."),
+      @ApiResponse(responseCode = "401", description = "Unauthorized - The supplied credentials, if any, are not sufficient to access the resource."),
+      @ApiResponse(responseCode = "408", description = "Request Timeout"),
+      @ApiResponse(responseCode = "409", description = "Conflict - The request could not be processed because of conflict in the request"),
+      @ApiResponse(responseCode = "429", description = "Too Many Requests - Your application is sending too many simultaneous requests."),
+      @ApiResponse(responseCode = "500", description = "Internal Server Error - We couldn't create the resource. Please try again."),
+      @ApiResponse(responseCode = "503", description = "Service Unavailable - We are temporarily unable. Please wait for a bit and try again. ")
     }
   )
   @PostMapping(
-    path = "/foos",
-    produces = {
-      MediaType.APPLICATION_JSON_VALUE
-    }
+    path = "/fooes",
+    produces = {APPLICATION_JSON_VALUE}
   )
-  public ResponseEntity<Void> send(
-    @ApiParam(value = "foo", name = "foo", required = true) @Valid @RequestBody FooDTO dto, BindingResult bindingResult,
-    HttpServletRequest request, UriComponentsBuilder ucBuilder) {
+  public ResponseEntity<Void> send(@Parameter @Valid @RequestBody FooDTO dto, HttpServletRequest request, UriComponentsBuilder ucBuilder) {
     //--
     try {
       String traceID = tracer.currentSpan().context().traceIdString();

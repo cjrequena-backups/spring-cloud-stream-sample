@@ -21,16 +21,8 @@
         <spring-boot-dependencies.version>2.1.15.RELEASE</spring-boot-dependencies.version>
         <!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-dependencies -->
         <spring-cloud-dependencies.version>Greenwich.SR6</spring-cloud-dependencies.version>
-        <!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger2 -->
-        <springfox-swagger2.version>2.9.2</springfox-swagger2.version>
-        <!-- https://mvnrepository.com/artifact/io.springfox/springfox-swagger-ui -->
-        <springfox-swagger-ui.version>2.9.2</springfox-swagger-ui.version>
-        <!-- https://mvnrepository.com/artifact/io.springfox/springfox-bean-validators -->
-        <springfox-bean-validators.version>2.9.2</springfox-bean-validators.version>
-        <!-- https://mvnrepository.com/artifact/org.msgpack/jackson-dataformat-msgpack -->
-        <jackson-dataformat-msgpack.version>0.8.15</jackson-dataformat-msgpack.version>
-        <!-- https://mvnrepository.com/artifact/com.netflix.feign/feign-jackson -->
-        <feign-jackson.version>8.18.0</feign-jackson.version>
+        <!-- https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-ui -->
+        <springdoc-openapi-ui.version>1.2.30</springdoc-openapi-ui.version>
         <!-- https://mvnrepository.com/artifact/org.zalando/jackson-datatype-money -->
         <jackson-datatype-money.version>1.0.2</jackson-datatype-money.version>
         <!-- Plugin versions -->

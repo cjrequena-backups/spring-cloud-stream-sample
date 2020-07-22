@@ -75,33 +75,10 @@
 
         <!-- json -->
         <dependency>
-            <groupId>org.msgpack</groupId>
-            <artifactId>jackson-dataformat-msgpack</artifactId>
-            <version>${jackson-dataformat-msgpack.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.netflix.feign</groupId>
-            <artifactId>feign-jackson</artifactId>
-            <version>${feign-jackson.version}</version>
-        </dependency>
-        <dependency>
             <groupId>org.zalando</groupId>
             <artifactId>jackson-datatype-money</artifactId>
             <version>${jackson-datatype-money.version}</version>
         </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.datatype</groupId>
-            <artifactId>jackson-datatype-jdk8</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.fasterxml.jackson.datatype</groupId>
-            <artifactId>jackson-datatype-jsr310</artifactId>
-        </dependency>
-
         <!-- -->
         <dependency>
             <groupId>org.projectlombok</groupId>
